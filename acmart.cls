@@ -1,3 +1,6 @@
+%% THIS FILE CONTAINS SLIGHT MODIFICATIONS FOR THE ARTICLE 
+%% TITLE TO BE RENDERED IN BOLD CORRECTLY ON OVERLEAF.
+%% 
 %%
 %% This is file `acmart.cls',
 %% generated with the docstrip utility.
@@ -37,7 +40,8 @@
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2019/08/24 v1.64 Typesetting articles for the Association for Computing Machinery]
+[2017/06/25 v1.41 Typesetting articles for Association of
+Computing Machinery]
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -67,32 +71,15 @@
     \PackageInfo{\@classname}{Using screen mode}%
   \else
     \PackageInfo{\@classname}{Not using screen mode}%
-  \fi}{\PackageError{\@classname}{The option screen can be either true or
+  \fi}{\PackageError{\@classname}{Option screen can be either true or
     false}}
 \ExecuteOptionsX{screen=false}
-\define@boolkey+{acmart.cls}[@ACM@]{urlbreakonhyphens}[true]{%
-  \if@ACM@urlbreakonhyphens
-    \PackageInfo{\@classname}{Using breaking urls on hyphens}%
-  \else
-    \PackageInfo{\@classname}{Not breaking urls on hyphens}%
-  \fi}{\PackageError{\@classname}{The option urlbreakonhyphens can be either true or
-    false}}
-\ExecuteOptionsX{urlbreakonhyphens=true}
-\define@boolkey+{acmart.cls}[@ACM@]{acmthm}[true]{%
-  \if@ACM@acmthm
-    \PackageInfo{\@classname}{Requiring acmthm}%
-  \else
-    \PackageInfo{\@classname}{Suppressing acmthm}%
-  \fi}{\PackageError{\@classname}{The option acmthm can be either true or
-    false}}
-\ExecuteOptionsX{acmthm=true}
 \define@boolkey+{acmart.cls}[@ACM@]{review}[true]{%
   \if@ACM@review
     \PackageInfo{\@classname}{Using review mode}%
-    \AtBeginDocument{\@ACM@printfoliostrue}%
   \else
     \PackageInfo{\@classname}{Not using review mode}%
-  \fi}{\PackageError{\@classname}{The option review can be either true or
+  \fi}{\PackageError{\@classname}{Option review can be either true or
     false}}
 \ExecuteOptionsX{review=false}
 \define@boolkey+{acmart.cls}[@ACM@]{authorversion}[true]{%
@@ -100,31 +87,15 @@
     \PackageInfo{\@classname}{Using authorversion mode}%
   \else
     \PackageInfo{\@classname}{Not using authorversion mode}%
-  \fi}{\PackageError{\@classname}{The option authorversion can be either true or
+  \fi}{\PackageError{\@classname}{Option authorversion can be either true or
     false}}
 \ExecuteOptionsX{authorversion=false}
-\define@boolkey+{acmart.cls}[@ACM@]{nonacm}[true]{%
-  \if@ACM@nonacm
-    \PackageInfo{\@classname}{Using nonacm mode}%
-    \AtBeginDocument{\@ACM@printacmreffalse}%
-    % in 'nonacm' mode we disable the "ACM Reference Format"
-    % printing by default, but this can be re-enabled by the
-    % user using \settopmatter{printacmref=true}
-  \else
-    \PackageInfo{\@classname}{Not using nonacm mode}%
-  \fi}{\PackageError{\@classname}{The option nonacm can be either true or
-    false}}
-\ExecuteOptionsX{nonacm=false}
-\define@boolkey+{acmart.cls}[@ACM@]{balance}[true]{}{%
-  \PackageError{\@classname}{The option balance can be either true or
-    false}}
-\ExecuteOptionsX{balance}
 \define@boolkey+{acmart.cls}[@ACM@]{natbib}[true]{%
   \if@ACM@natbib
     \PackageInfo{\@classname}{Explicitly selecting natbib mode}%
   \else
     \PackageInfo{\@classname}{Explicitly deselecting natbib mode}%
-  \fi}{\PackageError{\@classname}{The option natbib can be either true or
+  \fi}{\PackageError{\@classname}{Option natbib can be either true or
     false}}
 \ExecuteOptionsX{natbib=true}
 \define@boolkey+{acmart.cls}[@ACM@]{anonymous}[true]{%
@@ -132,7 +103,7 @@
     \PackageInfo{\@classname}{Using anonymous mode}%
   \else
     \PackageInfo{\@classname}{Not using anonymous mode}%
-  \fi}{\PackageError{\@classname}{The option anonymous can be either true or
+  \fi}{\PackageError{\@classname}{Option anonymous can be either true or
     false}}
 \ExecuteOptionsX{anonymous=false}
 \define@boolkey+{acmart.cls}[@ACM@]{timestamp}[true]{%
@@ -140,7 +111,7 @@
     \PackageInfo{\@classname}{Using timestamp mode}%
   \else
     \PackageInfo{\@classname}{Not using timestamp mode}%
-  \fi}{\PackageError{\@classname}{The option timestamp can be either true or
+  \fi}{\PackageError{\@classname}{Option timestamp can be either true or
     false}}
 \ExecuteOptionsX{timestamp=false}
 \define@boolkey+{acmart.cls}[@ACM@]{authordraft}[true]{%
@@ -150,7 +121,7 @@
     \@ACM@reviewtrue
   \else
     \PackageInfo{\@classname}{Not using authordraft mode}%
-  \fi}{\PackageError{\@classname}{The option authordraft can be either true or
+  \fi}{\PackageError{\@classname}{Option authordraft can be either true or
     false}}
 \ExecuteOptionsX{authordraft=false}
 \def\ACM@fontsize{}
@@ -164,10 +135,9 @@
 \ClassInfo{\@classname}{Using format \ACM@format, number \ACM@format@nr}
 \newif\if@ACM@manuscript
 \newif\if@ACM@journal
-\newif\if@ACM@journal@bibstrip
 \newif\if@ACM@sigchiamode
 \ifnum\ACM@format@nr=5\relax % siggraph
-  \ClassWarning{\@classname}{The format siggraph is now obsolete.
+  \ClassWarning{\@classname}{The format `siggraph' is now obsolete.
     I am switching to sigconf.}
   \setkeys{acmart.cls}{format=sigconf}
 \fi
@@ -198,11 +168,6 @@
   \@ACM@journalfalse
   \@ACM@sigchiamodetrue
 \fi
-\if@ACM@journal
- \@ACM@journal@bibstriptrue
-\else
- \@ACM@journal@bibstripfalse
-\fi
 \ifx\ACM@fontsize\@empty
   \ifcase\ACM@format@nr
   \relax % manuscript
@@ -228,9 +193,6 @@
 \ClassInfo{\@classname}{Using fontsize \ACM@fontsize}
 \LoadClass[\ACM@fontsize, reqno]{amsart}
 \RequirePackage{microtype}
-\RequirePackage{etoolbox}
-\RequirePackage{booktabs}
-\RequirePackage{refcount}
 \RequirePackage{totpages}
 \RequirePackage{environ}
 \if@ACM@manuscript
@@ -278,7 +240,7 @@
    \def\@tempb{compress}\ifx\@tempa\@tempb
      \def\NAT@cmprs{\@ne}\fi
    \def\@tempb{nocompress}\ifx\@tempa\@tempb
-     \def\NAT@cmprs{\z@}\fi
+     \def\NAT@cmprs{\@z}\fi
    \def\@tempb{sort&compress}\ifx\@tempa\@tempb
      \def\NAT@sort{\@ne}\def\NAT@cmprs{\@ne}\fi
    \def\@tempb{mcite}\ifx\@tempa\@tempb
@@ -424,7 +386,7 @@
     \def\@svsechd{#4{\hskip #1\relax #5}}%
   \fi
   \@xsect{#3}}
-\def\@starttoc#1#2{\begingroup\makeatletter
+\def\@starttoc#1#2{\begingroup
   \setTrue{#1}%
   \par\removelastskip\vskip\z@skip
   \@startsection{section}\@M\z@{\linespacing\@plus\linespacing}%
@@ -440,37 +402,10 @@
 \def\l@section{\@tocline{1}{0pt}{1pc}{2pc}{}}
 \def\l@subsection{\@tocline{2}{0pt}{1pc}{3pc}{}}
 \def\l@subsubsection{\@tocline{2}{0pt}{1pc}{5pc}{}}
-\def\@makefntext{\noindent\@makefnmark}
-\if@ACM@sigchiamode
-\long\def\@footnotetext#1{\marginpar{%
-    \reset@font\small
-    \interlinepenalty\interfootnotelinepenalty
-    \protected@edef\@currentlabel{%
-       \csname p@footnote\endcsname\@thefnmark
-    }%
-    \color@begingroup
-      \@makefntext{%
-        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-    \color@endgroup}}%
-\fi
-\long\def\@mpfootnotetext#1{%
-  \global\setbox\@mpfootins\vbox{%
-    \unvbox\@mpfootins
-    \reset@font\footnotesize
-    \hsize\columnwidth
-    \@parboxrestore
-    \protected@edef\@currentlabel
-         {\csname p@mpfootnote\endcsname\@thefnmark}%
-    \color@begingroup\centering
-      \@makefntext{%
-        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
-    \color@endgroup}}
-\def\@makefnmark{\hbox{\@textsuperscript{\normalfont\@thefnmark}}}
 \let\@footnotemark@nolink\@footnotemark
 \let\@footnotetext@nolink\@footnotetext
 \RequirePackage[bookmarksnumbered,unicode]{hyperref}
 \pdfstringdefDisableCommands{%
-  \def\addtocounter#1#2{}%
   \def\unskip{}%
   \def\textbullet{- }%
   \def\textrightarrow{ -> }%
@@ -490,27 +425,23 @@
 \or % sigchi-a
   \urlstyle{sf}
 \fi
-\AtEndPreamble{%
-  \if@ACM@urlbreakonhyphens
-    \def\do@url@hyp{\do\-}%
-  \fi
-  \if@ACM@screen
-    \hypersetup{colorlinks,
-      linkcolor=ACMPurple,
-      citecolor=ACMPurple,
-      urlcolor=ACMDarkBlue,
-      filecolor=ACMDarkBlue}
-    \else
-    \hypersetup{hidelinks}
-  \fi
-  \hypersetup{pdflang={en},
-    pdfdisplaydoctitle}}
+\if@ACM@screen
+  \hypersetup{colorlinks,
+    linkcolor=ACMRed,
+    citecolor=ACMPurple,
+    urlcolor=ACMDarkBlue,
+    filecolor=ACMDarkBlue}
+\else
+  \hypersetup{hidelinks}
+\fi
+\RequirePackage{cleveref}
 \if@ACM@natbib
   \let\citeN\cite
   \let\cite\citep
   \let\citeANP\citeauthor
   \let\citeNN\citeyearpar
   \let\citeyearNP\citeyear
+  \let\citeyear\citeyearpar
   \let\citeNP\citealt
   \DeclareRobustCommand\citeA
      {\begingroup\NAT@swafalse
@@ -522,7 +453,7 @@
     \providecommand\citename[1]{#1}}
 \fi
 \newcommand\shortcite[2][]{%
-  \ifNAT@numbers\cite[#1]{#2}\else\citeyearpar[#1]{#2}\fi}
+  \ifNAT@numbers\cite[#1]{#2}\else\citeyear[#1]{#2}\fi}
 \def\bibliographystyle#1{%
   \ifx\@begindocumenthook\@undefined\else
     \expandafter\AtBeginDocument
@@ -530,8 +461,7 @@
     {\if@filesw
        \immediate\write\@auxout{\string\bibstyle{#1}}%
      \fi}}
-\RequirePackage{graphicx}
-\RequirePackage[prologue]{xcolor}
+\RequirePackage{graphicx, xcolor}
 \definecolor[named]{ACMBlue}{cmyk}{1,0.1,0,0.1}
 \definecolor[named]{ACMYellow}{cmyk}{0,0.16,1,0}
 \definecolor[named]{ACMOrange}{cmyk}{0,0.42,1,0.01}
@@ -545,8 +475,8 @@
   \SetWatermarkFontSize{0.5in}
   \SetWatermarkColor[gray]{.9}
   \SetWatermarkText{\parbox{12em}{\centering
-      Unpublished working draft.\\
-      Not for distribution.}}
+      Unpublished working draft\\
+      Not for distribution}}
 \fi
 \RequirePackage{geometry}
 \ifcase\ACM@format@nr
@@ -631,8 +561,6 @@
   \hrule \@width \columnwidth \kern 2.6\p@}
 \RequirePackage{manyfoot}
 \SelectFootnoteRule[2]{copyrightpermission}
-\DeclareNewFootnote{authorsaddresses}
-\SelectFootnoteRule[2]{copyrightpermission}
 \DeclareNewFootnote{copyrightpermission}
 \def\footnoterule{\kern-3\p@
   \hrule \@width 4pc \kern 2.6\p@}
@@ -644,28 +572,38 @@
       \normalcolor
       \unvbox\@mpfootins
     \fi
-    \@minipagefalse
+    \@minipagefalse   %% added 24 May 89
   \color@endgroup
   \egroup
   \expandafter\@iiiparbox\@mpargs{\unvbox\@tempboxa}}
+\def\@makefntext{\noindent\@makefnmark}
+\if@ACM@sigchiamode
+\long\def\@footnotetext#1{\marginpar{%
+    \reset@font\small
+    \interlinepenalty\interfootnotelinepenalty
+    \protected@edef\@currentlabel{%
+       \csname p@footnote\endcsname\@thefnmark
+    }%
+    \color@begingroup
+      \@makefntext{%
+        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \color@endgroup}}%
+\fi
+\long\def\@mpfootnotetext#1{%
+  \global\setbox\@mpfootins\vbox{%
+    \unvbox\@mpfootins
+    \reset@font\footnotesize
+    \hsize\columnwidth
+    \@parboxrestore
+    \protected@edef\@currentlabel
+         {\csname p@mpfootnote\endcsname\@thefnmark}%
+    \color@begingroup\centering
+      \@makefntext{%
+        \rule\z@\footnotesep\ignorespaces#1\@finalstrut\strutbox}%
+    \color@endgroup}}
+\def\@makefnmark{\hbox{\@textsuperscript{\normalfont\@thefnmark}}}
 \def\@textbottom{\vskip \z@ \@plus 1pt}
 \let\@texttop\relax
-\ifcase\ACM@format@nr
-\relax % manuscript
-\or % acmsmall
-\or % acmlarge
-\or % acmtog
-  \flushbottom
-\or % sigconf
-  \flushbottom
-\or % siggraph
-  \flushbottom
-\or % sigplan
-  \flushbottom
-\or % sigchi
-  \flushbottom
-\or % sigchi-a
-\fi
 \RequirePackage{iftex}
 \ifPDFTeX
 \input{glyphtounicode}
@@ -673,68 +611,36 @@
 \pdfglyphtounicode{f_f_i}{FB03}
 \pdfglyphtounicode{f_f_l}{FB04}
 \pdfglyphtounicode{f_i}{FB01}
-\pdfglyphtounicode{t_t}{0074 0074}
-\pdfglyphtounicode{f_t}{0066 0074}
-\pdfglyphtounicode{T_h}{0054 0068}
+\pdfglyphtounicode{t_t}{00740074}
+\pdfglyphtounicode{f_t}{00660074}
+\pdfglyphtounicode{T_h}{00540068}
 \pdfgentounicode=1
 \fi
 \RequirePackage{cmap}
 \newif\if@ACM@newfonts
 \@ACM@newfontstrue
 \IfFileExists{libertine.sty}{}{\ClassWarning{\@classname}{You do not
-    have the libertine package installed.  Please upgrade your
+    have libertine package installed.  Please upgrade your
     TeX}\@ACM@newfontsfalse}
 \IfFileExists{zi4.sty}{}{\ClassWarning{\@classname}{You do not
-    have the zi4 package installed.  Please upgrade your
-    TeX}\@ACM@newfontsfalse}
+    have zi4 package installed.  Please upgrade your TeX}\@ACM@newfontsfalse}
 \IfFileExists{newtxmath.sty}{}{\ClassWarning{\@classname}{You do not
-    have the newtxmath package installed.  Please upgrade your
+    have newtxmath package installed.  Please upgrade your
     TeX}\@ACM@newfontsfalse}
 \if@ACM@newfonts
-  \RequirePackage[T1]{fontenc}
-\ifxetex
-  \RequirePackage[tt=false]{libertine}
-  \setmonofont{inconsolata}
-\else
-  \RequirePackage[tt=false, type1=true]{libertine}
-\fi
+\RequirePackage[tt=false, type1=true]{libertine}
 \RequirePackage[varqu]{zi4}
 \RequirePackage[libertine]{newtxmath}
+\RequirePackage[T1]{fontenc}
 \fi
-\let\liningnums\@undefined
-\AtEndPreamble{%
-  \DeclareTextFontCommand{\liningnums}{\libertineLF}}
 \if@ACM@sigchiamode
   \renewcommand{\familydefault}{\sfdefault}
 \fi
-\newif\if@Description@present
-\@Description@presenttrue
-\newif\if@undescribed@images
-\@undescribed@imagesfalse
-\newcommand\Description[2][]{\global\@Description@presenttrue\ignorespaces}
-\AtEndDocument{\if@undescribed@images
-  \ClassWarningNoLine{\@classname}{Some images may lack descriptions}\fi}
-\AtBeginEnvironment{figure}{\@Description@presentfalse
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig}
-\AtBeginEnvironment{figure*}{\@Description@presentfalse
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig}
-\AtEndEnvironment{figure}{\if@Description@present\else
-  \global\@undescribed@imagestrue
-  \ClassWarning{\@classname}{A possible image without description}\fi}
-\AtEndEnvironment{figure*}{\if@Description@present\else
-  \global\@undescribed@imagestrue
-  \ClassWarning{\@classname}{A possible image without description}\fi}
-\AtBeginEnvironment{table}{\let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig}
-\AtBeginEnvironment{table*}{\let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig}
 \RequirePackage{caption, float}
 \captionsetup[table]{position=top}
 \if@ACM@journal
   \captionsetup{labelfont={sf, small},
-    textfont={sf, small}, margin=\z@}
+    textfont={sf, small},  margin=\z@}
   \captionsetup[figure]{name={Fig.}}
 \else
   \captionsetup{labelfont={bf},
@@ -753,41 +659,26 @@
   \or % sigchi
     \captionsetup[figure]{labelfont={bf, small},
       textfont={bf, small}}
-    \captionsetup[table]{labelfont={bf, small},
-      textfont={bf, small}}
   \or % sigchi-a
     \captionsetup[figure]{labelfont={bf, small},
-      textfont={bf, small}}
-    \captionsetup[table]{labelfont={bf, small},
       textfont={bf, small}}
   \fi
 \fi
 \newfloat{sidebar}{}{sbar}
 \floatname{sidebar}{Sidebar}
 \renewenvironment{sidebar}{\Collect@Body\@sidebar}{}
-\long\def\@sidebar#1{\bgroup\let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig\captionsetup{type=sidebar}%
+\long\def\@sidebar#1{\bgroup\captionsetup{type=sidebar}%
   \marginpar{\small#1}\egroup}
 \newenvironment{marginfigure}{\Collect@Body\@marginfigure}{}
-\long\def\@marginfigure#1{\bgroup
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig
-  \captionsetup{type=figure}%
-  \marginpar{\@Description@presentfalse\centering
-    \small#1\if@Description@present\else
-      \global\@undescribed@imagestrue
-      \ClassWarning{\@classname}{A possible image without description}
-      \fi}%
-  \egroup}
+\long\def\@marginfigure#1{\bgroup\captionsetup{type=figure}%
+  \marginpar{\centering\small#1}\egroup}
 \newenvironment{margintable}{\Collect@Body\@margintable}{}
-\long\def\@margintable#1{\bgroup\let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig\captionsetup{type=table}%
+\long\def\@margintable#1{\bgroup\captionsetup{type=table}%
   \marginpar{\centering\small#1}\egroup}
 \newdimen\fulltextwidth
 \fulltextwidth=\dimexpr(\textwidth+\marginparwidth+\marginparsep)
 \if@ACM@sigchiamode
-\def\@dblfloat{\bgroup\let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig\columnwidth=\fulltextwidth
+\def\@dblfloat{\bgroup\columnwidth=\fulltextwidth
   \let\@endfloatbox\@endwidefloatbox
   \def\@fpsadddefault{\def\@fps{tp}}%
   \@float}
@@ -869,13 +760,9 @@
   \endlist
 }
 \let\enddescription=\endlist % for efficiency
-\newif\if@ACM@maketitle@typeset
-\@ACM@maketitle@typesetfalse
 \define@choicekey*+{ACM}{acmJournal}[\@journalCode\@journalCode@nr]{%
   CIE,%
   CSUR,%
-  DTRAP,%
-  HEALTH,%
   IMWUT,%
   JACM,%
   JDIQ,%
@@ -883,7 +770,6 @@
   JERIC,%
   JETC,%
   JOCCH,%
-  PACMCGIT,%
   PACMHCI,%
   PACMPL,%
   POMACS,%
@@ -894,13 +780,9 @@
   TALLIP,%
   TAP,%
   TCPS,%
-  TDS,%
   TEAC,%
   TECS,%
-  TELO,%
-  THRI,%
   TIIS,%
-  TIOT,%
   TISSEC,%
   TIST,%
   TKDD,%
@@ -925,13 +807,11 @@
   TOS,%
   TOSEM,%
   TOSN,%
-  TQC,%
   TRETS,%
   TSAS,%
   TSC,%
   TSLP,%
-  TWEB,%
-  FACMP%
+  TWEB%
 }{%
 \ifcase\@journalCode@nr
 \relax % CIE
@@ -942,21 +822,11 @@
   \def\@journalName{ACM Computing Surveys}%
   \def\@journalNameShort{ACM Comput. Surv.}%
   \def\@permissionCodeOne{0360-0300}%
-\or % DTRAP
-  \def\@journalName{Digital Threats: Research and Practice}%
-  \def\@journalNameShort{Digit. Threat. Res. Pract.}%
-  \def\@permissionCodeOne{2576-5337}%
-\or % HEALTH
-  \def\@journalName{ACM Transactions on Computing for Healthcare}%
-  \def\@journalNameShort{ACM Trans. Comput. Healthcare}%
-  \def\@permissionCodeOne{2637-8051}%
 \or % IMWUT
   \def\@journalName{Proceedings of the ACM on Interactive, Mobile,
     Wearable and Ubiquitous Technologies}%
   \def\@journalNameShort{Proc. ACM Interact. Mob. Wearable Ubiquitous Technol.}%
   \def\@permissionCodeOne{2474-9567}%
-  \@ACM@screentrue
-  \PackageInfo{\@classname}{Using screen mode due to \@journalCode}%
 \or % JACM
   \def\@journalName{Journal of the ACM}%
   \def\@journalNameShort{J. ACM}%
@@ -979,31 +849,19 @@
   \def\@permissionCodeOne{1550-4832}%
 \or % JOCCH
   \def\@journalName{ACM Journal on Computing and Cultural Heritage}%
-  \def\@journalNameShort{ACM J. Comput. Cult. Herit.}%
-\or % PACMCGIT
-  \def\@journalName{Proceedings of the ACM on Computer Graphics and Interactive Techniques}%
-  \def\@journalNameShort{Proc. ACM Comput. Graph. Interact. Tech.}%
-  \def\@permissionCodeOne{2577-6193}%
-  \@ACM@screentrue
-  \PackageInfo{\@classname}{Using screen mode due to \@journalCode}%
+  \def\@journalName{ACM J. Comput. Cult. Herit.}%
 \or % PACMHCI
   \def\@journalName{Proceedings of the ACM on Human-Computer Interaction}%
-  \def\@journalNameShort{Proc. ACM Hum.-Comput. Interact.}%
+  \def\@journalName{Proc. ACM Hum.-Comput. Interact.}%
   \def\@permissionCodeOne{2573-0142}%
-  \@ACM@screentrue
-  \PackageInfo{\@classname}{Using screen mode due to \@journalCode}%
 \or % PACMPL
   \def\@journalName{Proceedings of the ACM on Programming Languages}%
-  \def\@journalNameShort{Proc. ACM Program. Lang.}%
+  \def\@journalName{Proc. ACM Program. Lang.}%
   \def\@permissionCodeOne{2475-1421}%
-  \@ACM@screentrue
-  \PackageInfo{\@classname}{Using screen mode due to \@journalCode}%
 \or % POMACS
   \def\@journalName{Proceedings of the ACM on Measurement and Analysis of Computing Systems}%
-  \def\@journalNameShort{Proc. ACM Meas. Anal. Comput. Syst.}%
+  \def\@journalName{Proc. ACM Meas. Anal. Comput. Syst.}%
   \def\@permissionCodeOne{2476-1249}%
-  \@ACM@screentrue
-  \PackageInfo{\@classname}{Using screen mode due to \@journalCode}%
 \or % TAAS
   \def\@journalName{ACM Transactions on Autonomous and Adaptive Systems}%
   \def\@journalNameShort{ACM Trans. Autonom. Adapt. Syst.}%
@@ -1014,7 +872,6 @@
   \def\@permissionCodeOne{1936-7228}%
 \or % TACO
   \def\@journalName{ACM Transactions on Architecture and Code Optimization}%
-  \def\@journalNameShort{ACM Trans. Arch. Code Optim.}%
 \or % TALG
   \def\@journalName{ACM Transactions on Algorithms}%
   \def\@journalNameShort{ACM Trans. Algor.}%
@@ -1027,32 +884,16 @@
   \def\@journalName{ACM Transactions on Applied Perception}%
 \or % TCPS
   \def\@journalName{ACM Transactions on Cyber-Physical Systems}%
-\or % TDS
-  \def\@journalName{ACM Transactions on Data Science}%
-  \def\@journalNameShort{ACM Trans. Data Sci.}%
-  \def\@permissionCodeOne{2577-3224}%
 \or % TEAC
   \def\@journalName{ACM Transactions on Economics and Computation}%
 \or % TECS
   \def\@journalName{ACM Transactions on Embedded Computing Systems}%
   \def\@journalNameShort{ACM Trans. Embedd. Comput. Syst.}%
   \def\@permissionCodeOne{1539-9087}%
-\or % TELO
-  \def\@journalName{ACM Transactions on Evolutionary Learning}%
-  \def\@journalNameShort{ACM Trans. Evol. Learn.}%
-  \def\@permissionCodeOne{2688-3007}%
-\or % THRI
-  \def\@journalName{ACM Transactions on Human-Robot Interaction}%
-  \def\@journalNameShort{ACM Trans. Hum.-Robot Interact.}%
-  \def\@permissionCodeOne{2573-9522}%
 \or % TIIS
   \def\@journalName{ACM Transactions on Interactive Intelligent Systems}%
   \def\@journalNameShort{ACM Trans. Interact. Intell. Syst.}%
   \def\@permissionCodeOne{2160-6455}%
-\or % TIOT
-  \def\@journalName{ACM Transactions on Internet of Things}%
-  \def\@journalNameShort{ACM Trans. Internet Things}%
-  \def\@permissionCodeOne{2577-6207}%
 \or % TISSEC
   \def\@journalName{ACM Transactions on Information and System Security}%
   \def\@journalNameShort{ACM Trans. Info. Syst. Sec.}%
@@ -1103,12 +944,14 @@
   \def\@permissionCodeOne{0730-0301}
 \or % TOIS
   \def\@journalName{ACM Transactions on Information Systems}%
+  \def\@journalName{ACM Transactions on Information Systems}%
   \def\@permissionCodeOne{1046-8188}%
 \or % TOIT
   \def\@journalName{ACM Transactions on Internet Technology}%
   \def\@journalNameShort{ACM Trans. Internet Technol.}%
   \def\@permissionCodeOne{1533-5399}%
 \or % TOMACS
+  \def\@journalName{ACM Transactions on Modeling and Computer Simulation}%
   \def\@journalName{ACM Transactions on Modeling and Computer Simulation}%
   \def\@journalNameShort{ACM Trans. Model. Comput. Simul.}%
 \or % TOMM
@@ -1148,10 +991,6 @@
   \def\@journalName{ACM Transactions on Sensor Networks}%
   \def\@journalNameShort{ACM Trans. Sensor Netw.}%
   \def\@permissionCodeOne{1550-4859}%
-\or % TQC
-  \def\@journalName{ACM Transactions on Quantum Computing}%
-  \def\@journalNameShort{ACM Trans. Quantum Comput.}%
-  \def\@permissionCodeOne{2643-6817}%
 \or % TRETS
   \def\@journalName{ACM Transactions on Reconfigurable Technology and Systems}%
   \def\@journalNameShort{ACM Trans. Reconfig. Technol. Syst.}%
@@ -1172,17 +1011,12 @@
   \def\@journalName{ACM Transactions on the Web}%
   \def\@journalNameShort{ACM Trans. Web}%
   \def\@permissionCodeOne{1559-1131}%
-\else % FACMP, a dummy journal
-  \def\@journalName{Forthcoming ACM Publication}%
-  \def\@journalNameShort{ACM Forthcoming}%
-  \def\@permissionCodeOne{XXXX-XXXX}%
 \fi
 \ClassInfo{\@classname}{Using journal code \@journalCode}%
 }{%
   \ClassError{\@classname}{Incorrect journal #1}%
 }%
-\def\acmJournal#1{\setkeys{ACM}{acmJournal=#1}%
-  \global\@ACM@journal@bibstriptrue}
+\def\acmJournal#1{\setkeys{ACM}{acmJournal=#1}}
 \def\@journalCode@nr{0}
 \def\@journalName{}%
 \def\@journalNameShort{\@journalName}%
@@ -1195,46 +1029,23 @@
   \gdef\acmConference@venue{#4}%
   \ifx\acmConference@shortname\@empty
     \gdef\acmConference@shortname{#2}%
-  \fi
-  \global\@ACM@journal@bibstripfalse
-}
-\if@ACM@journal\else
+  \fi}
 \acmConference[Conference'17]{ACM Conference}{July 2017}{Washington,
-  DC, USA}%
-\fi
-\def\acmBooktitle#1{\gdef\@acmBooktitle{#1}}
-\acmBooktitle{Proceedings of \acmConference@name
-       \ifx\acmConference@name\acmConference@shortname\else
-         \ (\acmConference@shortname)\fi}
-\def\@editorsAbbrev{(Ed.)}
-\def\@acmEditors{}
-\def\editor#1{\ifx\@acmEditors\@empty
-    \gdef\@acmEditors{#1}%
-  \else
-    \gdef\@editorsAbbrev{(Eds.)}%
-    \g@addto@macro\@acmEditors{\and#1}%
-\fi}
+  DC, USA}
 \def\subtitle#1{\def\@subtitle{#1}}
 \subtitle{}
 \newcount\num@authorgroups
 \num@authorgroups=0\relax
-\newcount\num@authors
-\num@authors=0\relax
 \newif\if@insideauthorgroup
 \@insideauthorgroupfalse
 \renewcommand\author[2][]{%
-  \IfSubStr{#2}{,}{\ClassWarning{\@classname}{Do not put several
-      authors in the same \string\author\space macro!}}{}%
-  \global\advance\num@authors by 1\relax
   \if@insideauthorgroup\else
     \global\advance\num@authorgroups by 1\relax
     \global\@insideauthorgrouptrue
   \fi
   \ifx\addresses\@empty
     \if@ACM@anonymous
-      \gdef\addresses{\@author{Anonymous Author(s)%
-        \ifx\@acmSubmissionID\@empty\else\\Submission Id:
-          \@acmSubmissionID\fi}}%
+      \gdef\addresses{\@author{Anonymous Author(s)}}%
       \gdef\authors{Anonymous Author(s)}%
     \else
       \gdef\addresses{\@author{#2}}%
@@ -1248,9 +1059,7 @@
   \fi
   \if@ACM@anonymous
     \ifx\shortauthors\@empty
-      \gdef\shortauthors{Anon.
-        \ifx\@acmSubmissionID\@empty\else Submission Id:
-        \@acmSubmissionID\fi}%
+      \gdef\shortauthors{Anon.}%
     \fi
   \else
     \def\@tempa{#1}%
@@ -1274,7 +1083,7 @@
     \g@addto@macro\addresses{\affiliation{#1}{#2}}%
   \fi}
 \define@boolkey+{@ACM@affiliation@}[@ACM@affiliation@]{obeypunctuation}%
-[true]{}{\ClassError{\@classname}{The option obeypunctuation can be either true or false}}
+[true]{}{\ClassError{\@classname}{obeypunctuation must be true or false}}
 \def\additionalaffiliation#1{\authornote{\@additionalaffiliation{#1}}}
 \def\@additionalaffiliation#1{\bgroup
   \def\position##1{\ignorespaces}%
@@ -1288,14 +1097,10 @@
   \let\country\position
   Also with #1\unskip.\egroup}
 \renewcommand{\email}[2][]{%
-  \IfSubStr{#2}{,}{\ClassWarning{\@classname}{Do not put several
-      addresses in the same \string\email\space macro!}}{}%
   \if@ACM@anonymous\else
     \g@addto@macro\addresses{\email{#1}{#2}}%
   \fi}
 \def\orcid#1{\unskip\ignorespaces}
-\def\authorsaddresses#1{\def\@authorsaddresses{#1}}
-\authorsaddresses{\@mkauthorsaddresses}
 \def\@titlenotes{}
 \def\titlenote#1{%
   \g@addto@macro\@title{\footnotemark}%
@@ -1333,7 +1138,7 @@
 \def\acmNumber#1{\def\@acmNumber{#1}}
 \acmNumber{1}
 \def\acmArticle#1{\def\@acmArticle{#1}}
-\acmArticle{}
+\acmArticle{1}
 \def\acmArticleSeq#1{\def\@acmArticleSeq{#1}}
 \acmArticleSeq{\@acmArticle}
 \def\acmYear#1{\def\@acmYear{#1}}
@@ -1376,10 +1181,7 @@
 \def\keywords#1{\def\@keywords{#1}}
 \keywords{}
 \renewenvironment{abstract}{\Collect@Body\@saveabstract}{}
-\long\def\@saveabstract#1{\if@ACM@maketitle@typeset
-  \ClassError{\@classname}{Abstract must be defined before maketitle
-    command. Please move it!}\fi
-  \long\gdef\@abstract{#1}}
+\long\def\@saveabstract#1{\long\gdef\@abstract{#1}}
 \@saveabstract{}
 \long\def\@lempty{}
 \define@boolkey+{@ACM@topmatter@}[@ACM@]{printccs}[true]{%
@@ -1387,22 +1189,22 @@
     \ClassInfo{\@classname}{Printing CCS}%
   \else
     \ClassInfo{\@classname}{Suppressing CCS}%
-  \fi}{\ClassError{\@classname}{The option printccs can be either true or false}}
+  \fi}{\ClassError{\@classname}{printccs must be true or false}}
 \define@boolkey+{@ACM@topmatter@}[@ACM@]{printacmref}[true]{%
   \if@ACM@printacmref
     \ClassInfo{\@classname}{Printing bibformat}%
   \else
     \ClassInfo{\@classname}{Suppressing bibformat}%
-  \fi}{\ClassError{\@classname}{The option printacmref can be either true or false}}
+  \fi}{\ClassError{\@classname}{printacmref must be true or false}}
 \define@boolkey+{@ACM@topmatter@}[@ACM@]{printfolios}[true]{%
   \if@ACM@printfolios
     \ClassInfo{\@classname}{Printing folios}%
   \else
     \ClassInfo{\@classname}{Suppressing folios}%
-  \fi}{\ClassError{\@classname}{The option printfolios can be either true or false}}
+  \fi}{\ClassError{\@classname}{printfolios must be true or false}}
 \define@cmdkey{@ACM@topmatter@}[@ACM@]{authorsperrow}[0]{%
   \IfInteger{#1}{\ClassInfo{\@classname}{Setting authorsperrow to
-      #1}}{\ClassWarning{\@classname}{The parameter authorsperrow must be
+      #1}}{\ClassWarning{\@classname}{Parameter authorsperrow must be
       numerical. Ignoring the input #1}\gdef\@ACM@authorsperrow{0}}}
 \def\settopmatter#1{\setkeys{@ACM@topmatter@}{#1}}
 \settopmatter{printccs=true, printacmref=true}
@@ -1438,12 +1240,10 @@
 \RequirePackage{comment}
 \excludecomment{CCSXML}
 \let\@concepts\@empty
-\newcounter{@concepts}
 \newcommand\ccsdesc[2][100]{%
   \ccsdesc@parse#1~#2~~\ccsdesc@parse@end}
 \RequirePackage{textcomp}
 \def\ccsdesc@parse#1~#2~#3~{%
-  \stepcounter{@concepts}%
   \expandafter\ifx\csname CCS@General@#2\endcsname\relax
     \expandafter\gdef\csname CCS@General@#2\endcsname{\textbullet\
       \textbf{#2}}%
@@ -1457,10 +1257,9 @@
     \expandafter\gdef\csname CCS@Punctuation@#2\endcsname{
       \textrightarrow\ }%
     \expandafter\g@addto@macro\expandafter{\csname CCS@Specific@#2\endcsname}{%
-     \addtocounter{@concepts}{-1}%
-     \ifnum#1>499\textbf{#3}\else
-     \ifnum#1>299\textit{#3}\else
-     #3\fi\fi\ifnum\value{@concepts}=0.\else; \fi}%
+     \ifnum#1>499\textbf{#3}; \else
+     \ifnum#1>299\textit{#3}; \else
+     #3; \fi\fi}%
   \fi
 \ccsdesc@parse@finish}
 \def\ccsdesc@parse@finish#1\ccsdesc@parse@end{}
@@ -1473,9 +1272,9 @@
 \define@choicekey*{ACM@}{acmcopyrightmode}[%
   \acm@copyrightinput\acm@copyrightmode]{none,%
     acmcopyright,acmlicensed,rightsretained,%
-    usgov,usgovmixed,cagov,cagovmixed,licensedusgovmixed,%
-    licensedcagov,licensedcagovmixed,othergov,licensedothergov,%
-    iw3c2w3,iw3c2w3g}{%
+    usgov,usgovmixed,cagov,cagovmixed,%
+    licensedusgovmixed,%
+    licensedcagov,licensedcagovmixed,othergov,licensedothergov}{%
   \@printpermissiontrue
   \@printcopyrighttrue
   \@acmownedtrue
@@ -1489,13 +1288,13 @@
   \fi
   \ifnum\acm@copyrightmode=3\relax % rightsretained
    \@acmownedfalse
-   \AtBeginDocument{\acmPrice{}}%
+   \acmPrice{}%
   \fi
   \ifnum\acm@copyrightmode=4\relax % usgov
    \@printpermissiontrue
    \@printcopyrightfalse
    \@acmownedfalse
-   \AtBeginDocument{\acmPrice{}}%
+   \acmPrice{}%
   \fi
   \ifnum\acm@copyrightmode=6\relax % cagov
    \@acmownedfalse
@@ -1514,14 +1313,6 @@
   \fi
   \ifnum\acm@copyrightmode=12\relax % licensedothergov
    \@acmownedfalse
-  \fi
-  \ifnum\acm@copyrightmode=13\relax % iw3c2w3
-   \@acmownedfalse
-   \AtBeginDocument{\acmPrice{}}%
-  \fi
-  \ifnum\acm@copyrightmode=14\relax % iw3c2w3g
-   \@acmownedfalse
-   \AtBeginDocument{\acmPrice{}}%
   \fi}
 \def\setcopyright#1{\setkeys{ACM@}{acmcopyrightmode=#1}}
 \setcopyright{acmcopyright}
@@ -1531,7 +1322,7 @@
   Association for Computing Machinery.
   \or % acmlicensed
   Copyright held by the owner/author(s). Publication rights licensed to
-  ACM\@.
+  Association for Computing Machinery.
   \or % rightsretained
   Copyright held by the owner/author(s).
   \or % usgov
@@ -1543,24 +1334,18 @@
   Association for Computing Machinery.
   \or %licensedusgovmixed
   Copyright held by the owner/author(s). Publication rights licensed to
-  ACM\@.
+  Association for Computing Machinery.
   \or % licensedcagov
   Crown in Right of Canada. Publication rights licensed to
-  ACM\@.
+  Association for Computing Machinery.
   \or %licensedcagovmixed
   Copyright held by the owner/author(s). Publication rights licensed to
-  ACM\@.
+  Association for Computing Machinery.
   \or % othergov
   Association for Computing Machinery.
   \or % licensedothergov
   Copyright held by the owner/author(s). Publication rights licensed to
-  ACM\@.
-  \or % ic2w3www
-  IW3C2 (International World Wide Web Conference Committee), published
-  under Creative Commons CC-BY~4.0 License.
-  \or % ic2w3wwwgoogle
-  IW3C2 (International World Wide Web Conference Committee), published
-  under Creative Commons CC-BY-NC-ND~4.0 License.
+  Association for Computing Machinery.
   \fi}
 \def\@formatdoi#1{\url{https://doi.org/#1}}
 \def\@copyrightpermission{%
@@ -1603,10 +1388,16 @@
    source.
   \or % usgovmixed
    ACM acknowledges that this contribution was authored or co-authored
-   by an employee, contractor, or affiliate of the United States government. As such,
-   the United States government retains a nonexclusive, royalty-free right to
+   by an employee, or contractor of the national government. As such,
+   the Government retains a nonexclusive, royalty-free right to
    publish or reproduce this article, or to allow others to do so, for
-   government purposes only.
+   Government purposes only. Permission to make digital or hard copies
+   for personal or classroom use is granted. Copies must bear this
+   notice and the full citation on the first page. Copyrights for
+   components of this work owned by others than ACM must be
+   honored. To copy otherwise, distribute, republish, or post,
+   requires prior specific permission and\hspace*{.5pt}/or a
+   fee. Request permissions from permissions@acm.org.
   \or % cagov
    This article was authored by employees of the Government of Canada.
    As such, the Canadian government retains all interest in the
@@ -1674,18 +1465,7 @@
    retains a nonexclusive, royalty-free right to publish or reproduce
    this article, or to allow others to do so, for Government purposes
    only.
- \or % iw3c2w3
-   This paper is published under the Creative Commons Attribution~4.0
-   International (CC-BY~4.0) license. Authors reserve their rights to
-   disseminate the work on their personal and corporate Web sites with
-   the appropriate attribution.
- \or % iw3c2w3g
-   This paper is published under the Creative Commons
-   Attribution-NonCommercial-NoDerivs~4.0 International
-   (CC-BY-NC-ND~4.0) license. Authors reserve their rights to
-   disseminate the work on their personal and corporate Web sites with
-   the appropriate attribution.
- \fi}
+  \fi}
 \def\copyrightyear#1{\def\@copyrightyear{#1}}
 \copyrightyear{\@acmYear}
 \def\@teaserfigures{}
@@ -1700,17 +1480,17 @@
    \fi}}
 \newbox\mktitle@bx
 \def\maketitle{%
-  \@ACM@maketitle@typesettrue
   \if@ACM@anonymous
     % Anonymize omission of \author-s
     \ifnum\num@authorgroups=0\author{}\fi
   \fi
   \begingroup
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig
   \let\@footnotemark\@footnotemark@nolink
   \let\@footnotetext\@footnotetext@nolink
   \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
+  \global\@topnum\z@ % this prevents floats from falling
+                     % at the top of page 1
+  \global\@botnum\z@ % we do not want them to be on bottom either
   \hsize=\textwidth
   \def\@makefnmark{\hbox{\@textsuperscript{\@thefnmark}}}%
   \@mktitle\if@ACM@sigchiamode\else\@mkauthors\fi\@mkteasers
@@ -1721,25 +1501,17 @@
   \@titlenotes
   \@subtitlenotes
   \@authornotes
-  \let\@makefnmark\relax
-  \let\@thefnmark\relax
+  \let\@makefnmark\relax  \let\@thefnmark\relax
   \let\@makefntext\noindent
   \ifx\@empty\thankses\else
-    \footnotetextauthorsaddresses{%
+    \footnotetextcopyrightpermission{%
       \def\par{\let\par\@par}\parindent\z@\@setthanks}%
   \fi
-  \ifx\@empty\@authorsaddresses\else
-     \if@ACM@anonymous\else
-       \if@ACM@journal@bibstrip
-         \footnotetextauthorsaddresses{%
-           \def\par{\let\par\@par}\parindent\z@\@setauthorsaddresses}%
-       \fi
-     \fi
-  \fi
-  \if@ACM@nonacm\else\footnotetextcopyrightpermission{%
+  \footnotetextcopyrightpermission{%
     \if@ACM@authordraft
         \raisebox{-2ex}[\z@][\z@]{\makebox[0pt][l]{\large\bfseries
-            Unpublished working draft. Not for distribution.}}%
+            Unpublished
+            working draft. Not for distribution}}%
        \color[gray]{0.9}%
     \fi
     \parindent\z@\parskip0.1\baselineskip
@@ -1747,14 +1519,14 @@
       \if@printpermission\@copyrightpermission\par\fi
     \fi
     \if@ACM@manuscript\else
-       \if@ACM@journal@bibstrip\else % Print the conference information
+       \if@ACM@journal\else % Print the conference information
          {\itshape \acmConference@shortname, \acmConference@date, \acmConference@venue}\par
        \fi
     \fi
     \if@printcopyright
       \copyright\ \@copyrightyear\ \@copyrightowner\\
     \else
-      \@copyrightyear.\
+     \@copyrightyear.\
     \fi
     \if@ACM@manuscript
       Manuscript submitted to ACM\\
@@ -1763,10 +1535,10 @@
           This is the author's version of the work. It is posted here for
           your personal use. Not for redistribution. The definitive Version
           of Record was published in
-          \if@ACM@journal@bibstrip
+          \if@ACM@journal
             \emph{\@journalName}%
           \else
-            \emph{\@acmBooktitle}%
+            \emph{Proceedings of \acmConference@name, \acmConference@date}%
           \fi
           \ifx\@acmDOI\@empty
           .
@@ -1774,25 +1546,22 @@
             , \@formatdoi{\@acmDOI}.
           \fi\\
         \else
-          \if@ACM@nonacm\else
-            \if@ACM@journal@bibstrip
-              \@permissionCodeOne/\@acmYear/\@acmMonth-ART\@acmArticle
-              \ifx\@acmPrice\@empty\else\ \$\@acmPrice\fi\\
-              \@formatdoi{\@acmDOI}%
-            \else % Conference
-              \ifx\@acmISBN\@empty\else ACM~ISBN~\@acmISBN
-              \ifx\@acmPrice\@empty.\else\dots\$\@acmPrice\fi\\\fi
-              \ifx\@acmDOI\@empty\else\@formatdoi{\@acmDOI}\fi%
-            \fi
+          \if@ACM@journal
+            \@permissionCodeOne/\@acmYear/\@acmMonth-ART\@acmArticle
+            \ifx\@acmPrice\@empty\else\ \$\@acmPrice\fi\\
+            \@formatdoi{\@acmDOI}%
+          \else % Conference
+             ACM~ISBN~\@acmISBN
+             \ifx\@acmPrice\@empty.\else\dots\$\@acmPrice\fi\\
+             \@formatdoi{\@acmDOI}%
           \fi
         \fi
       \fi}
-    \fi
   \endgroup
   \setcounter{footnote}{0}%
   \@mkabstract
   \if@ACM@printccs
-  \ifx\@concepts\@empty\else\bgroup
+    \ifx\@concepts\@empty\else\bgroup
       {\@specialsection{CCS Concepts}%
          \@concepts\par}\egroup
      \fi
@@ -1812,18 +1581,8 @@
   \if@ACM@printacmref
      \@mkbibcitation
   \fi
-  \hypersetup{%
-    pdfauthor={\authors},
-    pdftitle={\@title},
-    pdfsubject={\@concepts},
-    pdfkeywords={\@keywords},
-    pdfcreator={LaTeX with acmart
-      \csname ver@acmart.cls\endcsname\space
-      and hyperref
-      \csname ver@hyperref.sty\endcsname}}%
-  \global\@topnum\z@ % this prevents floats from falling
-                     % at the top of page 1
-  \global\@botnum\z@ % we do not want them to be on the bottom either
+  \hypersetup{pdfauthor={\authors},
+    pdftitle={\@title}, pdfkeywords={\@concepts}}%
   \@printendtopmatter
   \@afterindentfalse
   \@afterheading
@@ -1848,7 +1607,7 @@
     \section*{#1}%
   \or % sigchi-a
     \section*{#1}%
-    \fi}
+  \fi}
 \def\@printtopmatter{%
   \ifx\@startPage\@empty
      \gdef\@startPage{1}%
@@ -1860,10 +1619,13 @@
   \ifcase\ACM@format@nr
   \relax % manuscript
     \box\mktitle@bx\par
+    \noindent\hrulefill\par
   \or % acmsmall
     \box\mktitle@bx\par
+    \noindent\hrulefill\par
   \or % acmlarge
     \box\mktitle@bx\par
+    \noindent\hrulefill\par
   \or % acmtog
     \twocolumn[\box\mktitle@bx]%
   \or % sigconf
@@ -2030,11 +1792,11 @@
 \def\postcode#1{\unskip\ignorespaces}
 \if@ACM@journal
   \def\position#1{\unskip\ignorespaces}
-  \def\institution#1{\unskip~#1\ignorespaces}
+  \def\institution#1{#1\ignorespaces}
   \def\city#1{\unskip\ignorespaces}
   \def\state#1{\unskip\ignorespaces}
-  \newcommand\department[2][0]{\unskip\ignorespaces}
-  \def\country#1{\if@ACM@affiliation@obeypunctuation\else, \fi#1\ignorespaces}
+  \newcommand\department[2][0]{}
+  \def\country#1{\unskip\ignorespaces}
 \else
   \def\position#1{\if@ACM@affiliation@obeypunctuation#1\else#1\par\fi}%
   \def\institution#1{\if@ACM@affiliation@obeypunctuation#1\else#1\par\fi}%
@@ -2137,8 +1899,7 @@
 \newdimen\author@bx@wd
 \newskip\author@bx@sep
 \author@bx@sep=1pc\relax
-\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd
-  \def\and{\par}\normalbaselines
+\def\@typeset@author@bx{\bgroup\hsize=\author@bx@wd\def\and{\par}%
   \global\setbox\author@bx=\vtop{\if@ACM@sigchiamode\else\centering\fi
     \@authorfont\@currentauthors\par\@affiliationfont
     \@currentaffiliation}\egroup
@@ -2174,11 +1935,9 @@
   \fi
   \gdef\and{}}%
   \def\email##1##2{\ifx\@currentaffiliation\@empty
-    \gdef\@currentaffiliation{\bgroup
-      \mathchardef\UrlBreakPenalty=10000\nolinkurl{##2}\egroup}%
+    \gdef\@currentaffiliation{\nolinkurl{##2}}%
   \else
-    \g@addto@macro\@currentaffiliation{\par\bgroup
-      \mathchardef\UrlBreakPenalty=10000\nolinkurl{##2}\egroup}%
+    \g@addto@macro\@currentaffiliation{\par\nolinkurl{##2}}%
   \fi}%
   \def\affiliation##1##2{\ifx\@currentaffiliation\@empty
     \gdef\@currentaffiliation{%
@@ -2237,26 +1996,6 @@
     \par\raggedright\leftskip=\z@
     \lineskip=1pc\noindent
     \addresses\let\and\@typeset@author@bx\and\par\bigskip\egroup}
-\def\@mkauthorsaddresses{%
-  \ifnum\num@authors>1\relax
-  Authors' \else Author's \fi
-  \ifnum\num@authorgroups>1\relax
-  addresses: \else address: \fi
-  \bgroup
-  \def\streetaddress##1{\unskip\@addpunct, ##1}%
-  \def\postcode##1{\unskip\@addpunct, ##1}%
-  \def\position##1{\unskip\ignorespaces}%
-  \def\institution##1{\unskip\@addpunct, ##1}%
-  \def\city##1{\unskip\@addpunct, ##1}%
-  \def\state##1{\unskip\@addpunct, ##1}%
-  \renewcommand\department[2][0]{\unskip\@addpunct, ##2}%
-  \def\country##1{\unskip\@addpunct, ##1}%
-  \def\and{\unskip\@addpunct; }%
-  \def\@author##1{##1}%
-  \def\email##1##2{\unskip\@addpunct, \nolinkurl{##2}}%
-  \addresses
-  \egroup}
-\def\@setaddresses{}
 \def\@authornotemark{\g@addto@macro\@currentauthors{\footnotemark\relax}}
 \def\@@authornotemark#1{\g@addto@macro\@currentauthors{\footnotemark[#1]}}
 \def\@mkteasers{%
@@ -2264,89 +2003,75 @@
     \def\@teaser##1{\par\bigskip\bgroup
       \captionsetup{type=figure}##1\egroup\par}
     \global\setbox\mktitle@bx=\vbox{\noindent\box\mktitle@bx\par
-      \noindent\@Description@presentfalse
-      \@teaserfigures\par\if@Description@present\else
-         \global\@undescribed@imagestrue
-         \ClassWarning{\@classname}{A possible image without
-           description}\fi
-    \medskip}%
+    \noindent\@teaserfigures\par\medskip}%
   \fi}
+\def\@setaddresses{}
 \def\@mkabstract{\bgroup
   \ifx\@abstract\@lempty\else
   {\phantomsection\addcontentsline{toc}{section}{Abstract}%
     \if@ACM@journal
-       \everypar{\setbox\z@\lastbox\everypar{}}\small
+       \small\noindent
     \else
-      \section*{\abstractname}%
+      \section*{Abstract}%
     \fi
    \ignorespaces\@abstract\par}%
   \fi\egroup}
 \def\@mkbibcitation{\bgroup
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig
-  \def\@pages@word{\ifnum\getrefnumber{TotPages}=1\relax page\else pages\fi}%
   \def\footnotemark{}%
   \def\\{\unskip{} \ignorespaces}%
-  \def\footnote{\ClassError{\@classname}{Please do not use footnotes
-      inside a \string\title{} or \string\author{} command! Use
+  \def\footnote{\ClassError{\@classname}{Please do note use footnotes
+      inside \string\title{} or \string\author{} command! Use
       \string\titlenote{} or \string\authornote{} instead!}}%
-  \def\@article@string{\ifx\@acmArticle\@empty{\ }\else,
-    Article~\@acmArticle\ \fi}%
-  \par\medskip\small\noindent{\bfseries ACM Reference Format:}\par\nobreak
-  \noindent\bgroup
-    \def\\{\unskip{}, \ignorespaces}\authors\egroup. \@acmYear. \@title
-  \ifx\@subtitle\@empty. \else: \@subtitle. \fi
-  \if@ACM@nonacm\else
-    % The 'nonacm' option disables 'printacmref' by default,
-    % and the present \@mkbibcitation definition is never used
-    % in this case. The conditional remains useful if the user
-    % explicitly sets \settopmatter{printacmref=true}.
-    \if@ACM@journal@bibstrip
-       \textit{\@journalNameShort}
-       \@acmVolume, \@acmNumber \@article@string (\@acmPubDate),
-       \ref{TotPages}~\@pages@word.
-    \else
-       In \textit{\@acmBooktitle}%
-       \ifx\@acmEditors\@empty\textit{.}\else
-         \andify\@acmEditors\textit{, }\@acmEditors~\@editorsAbbrev.%
-       \fi\
-       ACM, New York, NY, USA%
-         \@article@string\unskip, \ref{TotPages}~\@pages@word.
-    \fi
-  \fi
-  \ifx\@acmDOI\@empty\else\@formatdoi{\@acmDOI}\fi
+  \par\medskip\small\noindent{\bfseries ACM Reference format:}\par\nobreak
+  \noindent\authors. \@acmYear. \@title.
+  \if@ACM@journal
+     \textit{\@journalNameShort}
+     \@acmVolume, \@acmNumber, Article~\@acmArticle\ (\@acmPubDate),
+     \ref{TotPages}~pages.
+  \else
+     In \textit{Proceedings of \acmConference@name, \acmConference@venue,
+       \acmConference@date
+       \ifx\acmConference@name\acmConference@shortname\else
+         \ (\acmConference@shortname)\fi
+         ,} \ref{TotPages}~pages.
+  \fi\par
+  \noindent\@formatdoi{\@acmDOI}
 \par\egroup}
-\def\@printendtopmatter{\bgroup
-  \let\@vspace\@vspace@orig
-  \let\@vspacer\@vspacer@orig
-  \par\bigskip
-  \egroup}
+\def\@printendtopmatter{\par\medskip
+  \ifcase\ACM@format@nr
+  \relax % manuscript
+    \noindent\hrulefill\par\medskip
+  \or % acmsmall
+    \noindent\hrulefill\par\medskip
+  \or % acmlarge
+    \noindent\hrulefill\par\medskip
+  \or % acmtog
+    \par\bigskip
+  \or % sigconf
+    \par\bigskip
+  \or % siggraph
+    \par\bigskip
+  \or % sigplan
+    \par\bigskip
+  \or % sigchi
+    \par\bigskip
+  \or % sigchi-a
+  \fi
+}
 \def\@setthanks{\long\def\thanks##1{\par##1\@addpunct.}\thankses}
-\def\@setauthorsaddresses{\@authorsaddresses\unskip\@addpunct.}
 \RequirePackage{fancyhdr}
-\let\ACM@ps@plain\ps@plain
-\let\ACM@ps@myheadings\ps@myheadings
-\let\ACM@ps@headings\ps@headings
-\def\ACM@restore@pagestyle{%
-  \let\ps@plain\ACM@ps@plain
-  \let\ps@myheadings\ACM@ps@myheadings
-  \let\ps@headings\ACM@ps@headings}
-\AtBeginDocument{\ACM@restore@pagestyle}
 \if@ACM@review
   \newsavebox{\ACM@linecount@bx}
   \newlength\ACM@linecount@bxht
   \newcount\ACM@linecount
   \ACM@linecount\@ne\relax
   \def\ACM@mk@linecount{%
-    \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{\normalfont
-        \normalsize
-        \setlength{\ACM@linecount@bxht}{0pt}%
+    \savebox{\ACM@linecount@bx}[4em][t]{\parbox[t]{4em}{%
+        \setlength{\ACM@linecount@bxht}{-\baselineskip}%
         \loop{\color{red}\scriptsize\the\ACM@linecount}\\
         \global\advance\ACM@linecount by \@ne
         \addtolength{\ACM@linecount@bxht}{\baselineskip}%
-        \ifdim\ACM@linecount@bxht<\textheight\repeat
-        {\color{red}\scriptsize\the\ACM@linecount}\hfill
-        \global\advance\ACM@linecount by \@ne}}}
+        \ifdim\ACM@linecount@bxht<\textheight\repeat}}}
 \fi
 \def\ACM@linecountL{%
   \if@ACM@review
@@ -2363,7 +2088,7 @@
   \end{picture}%
   \fi}
 \if@ACM@timestamp
-  % Subtracting 30 from \time gives us the effect of rounding down despite
+  % Subtracting 30 from \time gives us the effect of rounding-down despite
   % \numexpr rounding to nearest
   \newcounter{ACM@time@hours}
   \setcounter{ACM@time@hours}{\numexpr (\time - 30) / 60 \relax}
@@ -2371,97 +2096,79 @@
   \setcounter{ACM@time@minutes}{\numexpr \time - \theACM@time@hours * 60 \relax}
   \newcommand\ACM@timestamp{%
     \footnotesize%
-    \ifx\@acmSubmissionID\@empty\relax\else
-    Submission ID: \@acmSubmissionID.{ }%
-    \fi
     \the\year-\two@digits{\the\month}-\two@digits{\the\day}{ }%
-    \two@digits{\theACM@time@hours}:\two@digits{\theACM@time@minutes}{. }%
-    Page \thepage\ of \@startPage--\pageref*{TotPages}.%
+    \two@digits{\theACM@time@hours}:\two@digits{\theACM@time@minutes}{ }%
+    page~\thepage\ (pp. \@startPage-\pageref*{TotPages})%
+    \ifx\@acmSubmissionID\@empty\relax\else
+    ~Submission~ID: \@acmSubmissionID
+    \fi
   }
 \fi
-\def\@shortauthors{%
-  \if@ACM@anonymous
-    Anon.
-    \ifx\@acmSubmissionID\@empty\else Submission Id: \@acmSubmissionID\fi
-  \else\shortauthors\fi}
-\def\@headfootfont{\sffamily\footnotesize}
-\AtBeginDocument{%
+\def\@shortauthors{\if@ACM@anonymous Anon.\else\shortauthors\fi}
+\def\@headfootfont{%
+  \ifcase\ACM@format@nr
+  \relax % manuscript
+    \sffamily
+  \or % acmsmall
+    \sffamily
+  \or % acmlarge
+    \sffamily
+  \or % acmtog
+    \sffamily
+  \or % sigconf
+    \sffamily
+  \or % siggraph
+    \sffamily
+  \or % sigplan
+    \sffamily
+  \or % sigchi
+    \sffamily
+  \or % sigchi-a
+    \sffamily
+  \fi}
 \fancypagestyle{standardpagestyle}{%
   \fancyhf{}%
   \renewcommand{\headrulewidth}{\z@}%
   \renewcommand{\footrulewidth}{\z@}%
-  \def\@acmArticlePage{%
-    \ifx\@acmArticle\empty%
-      \if@ACM@printfolios\thepage\fi%
-    \else%
-      \@acmArticle\if@ACM@printfolios:\thepage\fi%
-    \fi%
-  }%
-  \if@ACM@journal@bibstrip
-    \ifcase\ACM@format@nr
-    \relax % manuscript
-      \fancyhead[LE]{\ACM@linecountL\if@ACM@printfolios\thepage\fi}%
-      \fancyhead[RO]{\if@ACM@printfolios\thepage\fi}%
-      \fancyhead[RE]{\@shortauthors}%
-      \fancyhead[LO]{\ACM@linecountL\shorttitle}%
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize Manuscript submitted to ACM}
-      \fi%
-    \or % acmsmall
-      \fancyhead[LE]{\ACM@linecountL\@headfootfont\@acmArticlePage}%
-      \fancyhead[RO]{\@headfootfont\@acmArticlePage}%
-      \fancyhead[RE]{\@headfootfont\@shortauthors}%
-      \fancyhead[LO]{\ACM@linecountL\@headfootfont\shorttitle}%
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
-      \fi
-    \or % acmlarge
-      \fancyhead[LE]{\ACM@linecountL\@headfootfont
-      \@acmArticlePage\quad\textbullet\quad\@shortauthors}%
-      \fancyhead[LO]{\ACM@linecountL}%
-      \fancyhead[RO]{\@headfootfont
-        \shorttitle\quad\textbullet\quad\@acmArticlePage}%
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
-      \fi
-    \or % acmtog
-      \fancyhead[LE]{\ACM@linecountL\@headfootfont
-        \@acmArticlePage\quad\textbullet\quad\@shortauthors}%
-      \fancyhead[LO]{\ACM@linecountL}%
-      \fancyhead[RE]{\ACM@linecountR}%
-      \fancyhead[RO]{\@headfootfont
-        \shorttitle\quad\textbullet\quad\@acmArticlePage\ACM@linecountR}%
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
-      \fi
-    \else % Proceedings
-      \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
-      \fancyhead[LO]{\ACM@linecountL\@headfootfont\shorttitle}%
-      \fancyhead[RE]{\@headfootfont\@shortauthors\ACM@linecountR}%
-      \if@ACM@nonacm\else%
-        \fancyhead[LE]{\ACM@linecountL\@headfootfont\footnotesize
-          \acmConference@shortname,
-          \acmConference@date, \acmConference@venue}%
-        \fancyhead[RO]{\@headfootfont
-          \acmConference@shortname,
-          \acmConference@date, \acmConference@venue\ACM@linecountR}%
-      \fi
-    \fi
+  \ifcase\ACM@format@nr
+  \relax % manuscript
+    \fancyhead[LE]{\ACM@linecountL\if@ACM@printfolios\thepage\fi}%
+    \fancyhead[RO]{\if@ACM@printfolios\thepage\fi}%
+    \fancyhead[RE]{\@shortauthors}%
+    \fancyhead[LO]{\ACM@linecountL\shorttitle}%
+    \fancyfoot[RO,LE]{\footnotesize Manuscript submitted to ACM}%
+  \or % acmsmall
+    \fancyhead[LE]{\ACM@linecountL\@headfootfont\@acmArticle\if@ACM@printfolios:\thepage\fi}%
+    \fancyhead[RO]{\@headfootfont\@acmArticle\if@ACM@printfolios:\thepage\fi}%
+    \fancyhead[RE]{\@headfootfont\@shortauthors}%
+    \fancyhead[LO]{\ACM@linecountL\@headfootfont\shorttitle}%
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
+  \or % acmlarge
+    \fancyhead[LE]{\ACM@linecountL\@headfootfont
+      \@acmArticle\if@ACM@printfolios:\thepage\fi\quad\textbullet\quad\@shortauthors}%
+    \fancyhead[LO]{\ACM@linecountL}%
+    \fancyhead[RO]{\@headfootfont
+      \shorttitle\quad\textbullet\quad\@acmArticle\if@ACM@printfolios:\thepage\fi}%
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
+  \or % acmtog
+    \fancyhead[LE]{\ACM@linecountL\@headfootfont
+      \@acmArticle\if@ACM@printfolios:\thepage\fi\quad\textbullet\quad\@shortauthors}%
+    \fancyhead[LO]{\ACM@linecountL}%
+    \fancyhead[RE]{\ACM@linecountR}%
+    \fancyhead[RO]{\@headfootfont
+      \shorttitle\quad\textbullet\quad\@acmArticle\if@ACM@printfolios:\thepage\fi\ACM@linecountR}%
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date: \@acmPubDate.}%
   \else % Proceedings
     \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
     \fancyhead[LO]{\ACM@linecountL\@headfootfont\shorttitle}%
     \fancyhead[RE]{\@headfootfont\@shortauthors\ACM@linecountR}%
-    \if@ACM@nonacm\else%
-      \fancyhead[LE]{\ACM@linecountL\@headfootfont
-        \acmConference@shortname,
-        \acmConference@date, \acmConference@venue}%
-      \fancyhead[RO]{\@headfootfont
-        \acmConference@shortname,
-        \acmConference@date, \acmConference@venue\ACM@linecountR}%
-    \fi
+    \fancyhead[LE]{\ACM@linecountL\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue}%
+    \fancyhead[RO]{\@headfootfont\acmConference@shortname,
+      \acmConference@date, \acmConference@venue\ACM@linecountR}%
   \fi
   \if@ACM@sigchiamode
      \fancyheadoffset[L]{\dimexpr(\marginparsep+\marginparwidth)}%
@@ -2469,9 +2176,8 @@
   \if@ACM@timestamp
      \fancyfoot[LO,RE]{\ACM@timestamp}
   \fi
-}%
-\pagestyle{standardpagestyle}
 }
+\pagestyle{standardpagestyle}
 \newdimen\@folio@wd
 \@folio@wd=\z@
 \newdimen\@folio@ht
@@ -2492,8 +2198,7 @@
   \@folio@voffset=.55in\relax
   \def\@folio@max{10}
 \fi
-\def\@folioblob{\@tempcnta=0\@acmArticleSeq\relax
-  \ifnum\@tempcnta=0\relax\else
+\def\@folioblob{\@tempcnta=\@acmArticleSeq\relax
   \loop
      \ifnum\@tempcnta>\@folio@max\relax
       \advance\@tempcnta by - \@folio@max
@@ -2510,55 +2215,40 @@
         \parbox{\@folio@wd}{%
           \centering
           \textcolor{white}{\LARGE\sffamily\bfseries\@acmArticle}}}}
-  \end{picture}\fi}
+  \end{picture}}
 
-\AtBeginDocument{%
 \fancypagestyle{firstpagestyle}{%
   \fancyhf{}%
   \renewcommand{\headrulewidth}{\z@}%
   \renewcommand{\footrulewidth}{\z@}%
-  \if@ACM@journal@bibstrip
-    \ifcase\ACM@format@nr
-    \relax % manuscript
-      \fancyhead[L]{\ACM@linecountL}%
-      \fancyfoot[RO,LE]{\if@ACM@printfolios\small\thepage\fi}%
-      \if@ACM@nonacm\else%
-        \fancyfoot[RE,LO]{\footnotesize Manuscript submitted to ACM}%
-      \fi%
-    \or % acmsmall
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date:
-        \@acmPubDate.}%
-      \fi%
-      \fancyhead[LE]{\ACM@linecountL\@folioblob}%
-      \fancyhead[LO]{\ACM@linecountL}%
-      \fancyhead[RO]{\@folioblob}%
-      \fancyheadoffset[RO,LE]{0.6\@folio@wd}%
-    \or % acmlarge
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date:
-        \@acmPubDate.}%
-      \fi%
-      \fancyhead[RO]{\@folioblob}%
-      \fancyhead[LE]{\ACM@linecountL\@folioblob}%
-      \fancyhead[LO]{\ACM@linecountL}%
-      \fancyheadoffset[RO,LE]{1.4\@folio@wd}%
-    \or % acmtog
-      \if@ACM@nonacm\else%
-        \fancyfoot[RO,LE]{\footnotesize \@journalNameShort, Vol. \@acmVolume, No.
-        \@acmNumber, Article \@acmArticle.  Publication date:
-        \@acmPubDate.}%
-      \fi%
-      \fancyhead[L]{\ACM@linecountL}%
-      \fancyhead[R]{\ACM@linecountR}%
-    \else % Conference proceedings
-      \fancyhead[L]{\ACM@linecountL}%
-      \fancyhead[R]{\ACM@linecountR}%
-      \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
-    \fi
-  \else
+  \ifcase\ACM@format@nr
+  \relax % manuscript
+    \fancyhead[L]{\ACM@linecountL}%
+    \fancyfoot[RO,LE]{\if@ACM@printfolios\small\thepage\fi}%
+    \fancyfoot[RE,LO]{\footnotesize Manuscript submitted to ACM}%
+  \or % acmsmall
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date:
+    \@acmPubDate.}%
+    \fancyhead[LE]{\ACM@linecountL\@folioblob}%
+    \fancyhead[LO]{\ACM@linecountL}%
+    \fancyhead[RO]{\@folioblob}%
+    \fancyheadoffset[RO,LE]{0.6\@folio@wd}%
+  \or % acmlarge
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date:
+    \@acmPubDate.}%
+    \fancyhead[RO]{\@folioblob}%
+    \fancyhead[LE]{\ACM@linecountL\@folioblob}%
+    \fancyhead[LO]{\ACM@linecountL}%
+    \fancyheadoffset[RO,LE]{1.4\@folio@wd}%
+  \or % acmtog
+    \fancyfoot[RO,LE]{\footnotesize \@journalName, Vol. \@acmVolume, No.
+    \@acmNumber, Article \@acmArticle.  Publication date:
+    \@acmPubDate.}%
+    \fancyhead[L]{\ACM@linecountL}%
+    \fancyhead[R]{\ACM@linecountR}%
+  \else % Conference proceedings
     \fancyhead[L]{\ACM@linecountL}%
     \fancyhead[R]{\ACM@linecountR}%
     \fancyfoot[C]{\if@ACM@printfolios\footnotesize\thepage\fi}%
@@ -2566,64 +2256,32 @@
   \if@ACM@timestamp
     \ifnum\ACM@format@nr=0\relax % Manuscript
     \fancyfoot[LO,RE]{\ACM@timestamp\quad
-      \if@ACM@nonacm\else
-        \footnotesize Manuscript submitted to ACM
-      \fi}
+      \footnotesize Manuscript submitted to ACM}
     \else
     \fancyfoot[LO,RE]{\ACM@timestamp}
     \fi
   \fi
-}}
-\def\ACM@NRadjust#1{%
- \begingroup
-  \expandafter\ifx\csname Sectionformat\endcsname\relax
-  % do nothing when  \Sectionformat  is unknown
-   \def\next{\endgroup #1}%
- \else
-  \def\next{\endgroup
-   \let\realSectionformat\Sectionformat
-   \def\ACM@sect@format@{#1}%
-   \let\Sectionformat\ACM@NR@adjustedSectionformat
- %%  next lines added 2018-06-17 to ensure section number is styled
-   \let\real@adddotafter\@adddotafter
-   \let\@adddotafter\ACM@adddotafter
-   #1{}% imposes the styles, but nullifies  \MakeUppercase
-   \let\@adddotafter\real@adddotafter
-  }%
- \fi \next
 }
-\def\ACM@NR@adjustedSectionformat#1#2{%
- \realSectionformat{\ACM@sect@format{#1}}{#2}%
- \let\Sectionformat\realSectionformat}
-\DeclareRobustCommand{\ACM@sect@format}{\ACM@sect@format@}
-\def\ACM@sect@format@null#1{#1}
-\let\ACM@sect@format@\ACM@sect@format@null
-\AtBeginDocument{%
- \expandafter\ifx\csname LTX@adddotafter\endcsname\relax
-  \let\LTX@adddotafter\@adddotafter
- \fi
-}
-\def\ACM@adddotafter#1{\ifx\relax#1\relax\else\LTX@adddotafter{#1}\fi}
 \renewcommand\section{\@startsection{section}{1}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
-  {\ACM@NRadjust\@secfont}}
+  {\@secfont}}
 \renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
   {-.75\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {.25\baselineskip}%
-  {\ACM@NRadjust\@subsecfont}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+  {\@subsecfont}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{10pt}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
-  {\ACM@NRadjust{\@subsubsecfont\@adddotafter}}}
+  {\@subsubsecfont\@adddotafter}}
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\parindent}%
   {-.5\baselineskip \@plus -2\p@ \@minus -.2\p@}%
   {-3.5\p@}%
-  {\ACM@NRadjust{\@parfont\@adddotafter}}}
+  {\@parfont\@adddotafter}}
 \renewcommand\part{\@startsection{part}{9}{\z@}%
   {-10\p@ \@plus -4\p@ \@minus -2\p@}%
   {4\p@}%
-  {\ACM@NRadjust\@parfont}}
+  {\@parfont}}
 \def\section@raggedright{\@rightskip\@flushglue
   \rightskip\@rightskip
   \leftskip\z@skip
@@ -2739,34 +2397,15 @@
   {.5em}% spacing after head
   {\thmname{#1}\thmnumber{ #2}\thmnote{ {\@acmdefinitionnotefont(#3)}}}% head spec
 \theoremstyle{acmplain}
-\AtEndPreamble{%
-  \if@ACM@acmthm
-  \theoremstyle{acmplain}
-  \@ifundefined{theorem}{%
-  \newtheorem{theorem}{Theorem}[section]
-  }{}
-  \@ifundefined{conjecture}{%
-  \newtheorem{conjecture}[theorem]{Conjecture}
-  }{}
-  \@ifundefined{proposition}{%
-  \newtheorem{proposition}[theorem]{Proposition}
-  }{}
-  \@ifundefined{lemma}{%
-  \newtheorem{lemma}[theorem]{Lemma}
-  }{}
-  \@ifundefined{corollary}{%
-  \newtheorem{corollary}[theorem]{Corollary}
-  }{}
-  \theoremstyle{acmdefinition}
-  \@ifundefined{example}{%
-  \newtheorem{example}[theorem]{Example}
-  }{}
-  \@ifundefined{definition}{%
-  \newtheorem{definition}[theorem]{Definition}
-  }{}
-  \fi
-  \theoremstyle{acmplain}
-}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{acmdefinition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{acmplain}
 \def\@proofnamefont{\scshape}
 \def\@proofindent{\indent}
 \ifcase\ACM@format@nr
@@ -2791,47 +2430,16 @@
 }{%
   \popQED\endtrivlist\@endpefalse
 }
-\AtEndPreamble{%
-  \if@ACM@balance
-    \ifcase\ACM@format@nr
-    \relax % manuscript
-         \global\@ACM@balancefalse
-       \or % acmsmall
-         \global\@ACM@balancefalse
-       \or % acmlarge
-         \global\@ACM@balancefalse
-       \or % acmtog
-          \RequirePackage{balance}%
-       \or % sigconf
-          \RequirePackage{balance}%
-       \or % siggraph
-          \RequirePackage{balance}%
-       \or % sigplan
-          \RequirePackage{balance}%
-       \or % sigchi
-          \RequirePackage{balance}%
-       \or % sigchi-a
-          \global\@ACM@balancefalse
-    \fi
-  \fi
-}
-\AtEndDocument{%
-  \if@ACM@balance
-  \if@twocolumn
-  \balance
-  \fi\fi}
-\newcommand\acksname{Acknowledgments}
 \specialcomment{acks}{%
   \begingroup
-  \section*{\acksname}
-  \phantomsection\addcontentsline{toc}{section}{\acksname}
+  \section*{Acknowledgments}
+  \phantomsection\addcontentsline{toc}{section}{Acknowledgments}
 }{%
   \endgroup
 }
 \def\grantsponsor#1#2#3{#2}
 \newcommand\grantnum[3][]{#3%
   \def\@tempa{#1}\ifx\@tempa\@empty\else\space(\url{#1})\fi}
-\AtEndPreamble{%
 \if@ACM@screen
   \includecomment{screenonly}
   \excludecomment{printonly}
@@ -2844,7 +2452,7 @@
   \excludecomment{acks}
 \else
   \includecomment{anonsuppress}
-\fi}
+\fi
 \newcommand\showeprint[2][arxiv]{%
   \def\@tempa{#1}%
   \ifx\@tempa\@empty\def\@tempa{arxiv}\fi
@@ -2852,19 +2460,6 @@
   \ifx\@tempa\@tempb
      arXiv:\href{http://arxiv.org/abs/#2}{#2}\else arXiv:#2%
   \fi}
-\let\@vspace@orig=\@vspace
-\let\@vspacer@orig=\@vspacer
-\apptocmd{\@vspace}{\ClassWarning{\@classname}{\string\vspace\space should
-    only be used to provide space above/below surrounding
-    objects}}{}{}
-\apptocmd{\@vspacer}{\ClassWarning{\@classname}{\string\vspace\space should
-    only be used to provide space above/below surrounding
-    objects}}{}{}
-\let\ACM@origbaselinestretch\baselinestretch
-\AtEndDocument{\ifx\baselinestretch\ACM@origbaselinestretch\else
-  \ClassError{\@classname}{An attempt to redefine
-    \string\baselinestretch\space detected.  Please do not do this for
-    ACM submissions!}\fi}
 \normalsize\normalfont\frenchspacing
 \endinput
 %%
