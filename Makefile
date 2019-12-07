@@ -1,4 +1,4 @@
-targets = cyber.pdf accreditation.pdf
+targets = accreditation.pdf
 
 all: $(targets)
 
